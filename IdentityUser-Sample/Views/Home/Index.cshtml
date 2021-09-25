@@ -1,0 +1,24 @@
+﻿@model IEnumerable<Microsoft.AspNetCore.Identity.IdentityUser>
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>List of Users Roles</h1>
+<table class="table table-striped table-bordered">
+    <thead>
+        <tr>
+            <td>Id</td>
+            <td>Email</td>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var Usuario in Model)
+        {
+            <tr>
+                <td><a asp-action="ViewRoles" asp-route-id=@Usuario.Id>@Usuario.Id</a></td>
+                <td>@Usuario.Email</td>
+            </tr>
+        }
+    </tbody>
+</table>

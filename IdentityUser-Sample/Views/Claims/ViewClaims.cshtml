@@ -1,0 +1,46 @@
+﻿@model string
+@{
+    ViewData["Title"] = "ver";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>List of Claims</h1>
+<hr />
+<h2>@Model</h2>
+<hr />
+
+<form action="/Claims/Index" method="post">
+    <label for="firstName">Add Claim: </label>
+    <input type="text" id="Tipo" name="Tipo" placeholder="Your Claim goes here" />
+    <input type="hidden" id="Id" name="Id" value=@Model />
+    <input type="submit" value="Submit" />
+</form>
+
+<hr />
+<table style="width:10%" cellspacing=3 cellpadding=3>
+    <thead>
+        <tr>
+            <th><h5>Type</h5></th>
+            <th><h5>Value</h5></th>
+        </tr>
+    </thead>
+</table>
+<br />
+@foreach (System.Security.Claims.Claim x in ViewBag.Claims)
+{
+    <form method="post" action="/Claims/Delete">
+
+        <table style="width:10%" border=1 cellspacing=3 cellpadding=3>
+            <tr>
+                <td>@x.Type</td>
+                <td>@x.Value</td>
+                <td><input type="submit" value="Delete" /></td>
+            </tr>
+        </table>
+        <br />
+        <input type="hidden" id="Type" name="Type" value=@x.Type />
+        <input type="hidden" id="Value" name="Value" value=@x.Value />
+        <input type="hidden" id="Id" name="Id" value=@Model />
+    </form>
+}
+

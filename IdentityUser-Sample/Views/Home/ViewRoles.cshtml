@@ -1,0 +1,44 @@
+﻿@model IEnumerable<string>
+
+@{
+    ViewData["Title"] = "ver";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>List of Roles</h1>
+<hr />
+<form action="/Home/CreateRole" method="post">
+    <label for="Rol">Add Role: </label>
+    <input type="hidden" id="Id" name="Id" value=@ViewBag.ID />
+    <select name="Rol" asp-items="@ViewBag.roles">
+        <option value="">Please select...</option>
+    </select>
+    <input type="submit" value="Submit" />
+</form>
+<hr />
+<br />
+<thead>
+    <tr>
+        <th><h5>Type</h5></th>
+    </tr>
+</thead>
+<tr>
+    @foreach (var x in Model)
+    {
+
+
+        var data = new Dictionary<string, string>
+{
+             {"Id", ViewBag.ID},
+            {"Rol", x}
+        };
+
+@x
+<td><a asp-action="DeleteRole" asp-all-route-data="data"> Delete</a></td>
+<td><br /></td>
+}
+</tr>
+
+<br />
+<hr />
+<br />
